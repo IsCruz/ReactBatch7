@@ -1,26 +1,50 @@
 import React from 'react';
-import logo from './logo.svg';
+import AddTask from './components/AddTask';
 import './App.css';
 
-function App() {
-  return (
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      taskValue: '',
+      tasks: []
+    };
+     this.onChange = this.onChange.bind(this);
+     this.addTaskEvent = this.addTaskEvent.bind(this);
+  }
+
+  addTaskEvent(event){
+    event.preventDefault();
+    const {taskValue, tasks} = this.state;
+    this.setState({
+      tasks: [...tasks, taskValue],
+      taskValue: ''
+    });
+  }
+  onChange(event) {
+    console.log(event);
+    // const {taskValue} = this.state;
+    this.setState({
+      taskValue: event.target.value
+    });
+  }
+
+   componentDidMount() {
+   }
+  render () {
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddTask
+      mono={this.onChange}
+      valueForTask={this.state.taskValue}
+      addTaskEvent={this.addTaskEvent}
+      />
+      {this.state.tasks}
+      <div>
+      </div>
     </div>
-  );
+    );
+  };
 }
 
 export default App;
