@@ -1,5 +1,5 @@
 import React from 'react';
-import AddTask from './components/AddTask';
+import AddTask, { Hello } from './components/AddTask';
 import './App.css';
 
 class App extends React.Component {
@@ -32,18 +32,26 @@ class App extends React.Component {
    componentDidMount() {
    }
   render () {
-    return (
+    const user = {
+      name: 'Alan',
+      lastname: 'Turizo'
+    };
+
+    return(
+      <Hello />
+    );
+    /* return (
     <div className="App">
       <AddTask
       mono={this.onChange}
       valueForTask={this.state.taskValue}
       addTaskEvent={this.addTaskEvent}
       />
-      {this.state.tasks}
+      {this.state.tasks} 
       <div>
       </div>
     </div>
-    );
+    );*/
   };
 }
 

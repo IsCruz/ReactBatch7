@@ -1,7 +1,10 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
-export function Hello () {
-    return <div>hello</div>;
+ 
+export function Hello (props) {
+    return <div>hello {props.user.name}
+    {props.user.lastname}</div>;
 }
 function AddTask(props) {
         return(
@@ -24,4 +27,19 @@ function AddTask(props) {
             </div>
         );
 }
+
+Hello.defaultProps = {
+    user: {
+        name: 'Guillermo',
+        lastname: 'Del Toro'
+    }
+};
+
+Hello.propTypes = {
+    user: propTypes.shape({
+        name: propTypes.string,
+        lastname: propTypes.string.isRequired
+    }).isRequired
+};
+
 export default AddTask;
