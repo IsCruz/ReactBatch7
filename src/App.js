@@ -1,51 +1,23 @@
 import React from 'react';
-import AddTask from './components/AddTask';
+import {HashRouter, Route, Switch} from 'react-router-dom';
+import Home from './pages/Home';
 import './App.css';
+import TaskManager from './pages/TaskManager';
+import ProtectedRoute from './components/ProtectedRoute';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      taskValue: '',
-      tasks: []
-    };
-     this.onChange = this.onChange.bind(this);
-     this.addTaskEvent =  this.addTaskEvent.bind(this);
-  }
-
-  addTaskEvent(event){
-    event.preventDefault();
-    const {taskValue, tasks} = this.state;
-    this.setState({
-      tasks: [...tasks, taskValue],
-      taskValue: ''
-    });
-  }
-  onChange(event) {
-    console.log(event);
-    // const {taskValue} = this.state;
-    this.setState({
-      taskValue: event.target.value
-    });
-  }
-
-   componentDidMount() {
-   }
-  render () {
-
-    return (
-    <div className="App">
-      <AddTask
-      mono={this.onChange}
-      valueForTask={this.state.taskValue}
-      addTaskEvent={this.addTaskEvent}
-      allTasks={this.state.tasks}
-      />
-      <div>
-      </div>
-    </div>
-    );
-  };
+    render() {
+        return (
+            <HashRouter basename="/">
+                <div>
+                  <Switch>
+                    <Route exact path="/" component={Home} />
+                    <ProtectedRoute exact path="/task" component={TaskManager} />
+                    <Route exact path="*" component={() => "404 NOT FOUND"} />
+                  </Switch>
+                </div>
+            </HashRouter>
+        )
+    }
 }
-
-export default App;
+export default App

@@ -1,0 +1,10 @@
+.navbar-brand {
+    color: #333!important;
+}
+a{
+    color:#aaa;
+    font-weight: 200;
+}
+button.navbar-toggler .navbar-toggler-right .buttonColor, .navbar-toggler-icon {
+    background-color:#000051;
+}
