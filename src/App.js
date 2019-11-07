@@ -3,6 +3,7 @@ import {HashRouter, Route, Switch} from 'react-router-dom';
 import Home from './pages/Home';
 import './App.css';
 import TaskManager from './pages/TaskManager';
+import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 
 class App extends React.Component {
@@ -12,6 +13,7 @@ class App extends React.Component {
                 <div>
                   <Switch>
                     <Route exact path="/" component={Home} />
+                    <Route exact path="/login" component={Login} />
                     <ProtectedRoute exact path="/task" component={TaskManager} />
                     <Route exact path="*" component={() => "404 NOT FOUND"} />
                   </Switch>

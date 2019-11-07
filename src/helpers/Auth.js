@@ -2,19 +2,19 @@ class Auth {
  constructor(){
      this.authenticated = false;
 }
- login(callback) {
-     localStorage.setItem('isLogged', true);
+ login(data, callback) {
+     localStorage.setItem('token', data.token);
      this.authenticated = true;
      callback();
  }
  logout(callback) {
-     localStorage.removeItem('isLogged');
+     localStorage.removeItem('token');
      this.authenticated = false;
      callback();
  }
  isAuthenticated(){
      this.authenticated = false;
-     if(localStorage.getItem('isLogged')){
+     if(localStorage.getItem('token')){
          this.authenticated = true;
      }
      return this.authenticated;

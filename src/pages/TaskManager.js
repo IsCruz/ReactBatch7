@@ -1,5 +1,6 @@
 import React from 'react';
 import AddTask from '../components/AddTask';
+import { getList, saveTask} from '../services/taskServices';
 import Navbar from '../components/genericComponents/Navbar';
 import Jumbotron from '../components/genericComponents/Jumbotron';
 import Footer from '../components/genericComponents/Footer';
@@ -19,9 +20,14 @@ class TaskManager extends React.Component {
   addTaskEvent(event){
     event.preventDefault();
     const {taskValue, tasks} = this.state;
-    this.setState({
-      tasks: [...tasks, taskValue],
-      taskValue: ''
+    saveTask({todo_description: taskValue})
+    .then(data => {
+      if(data.success) {
+        this.setState({
+          tasks: [...tasks, taskValue],
+          taskValue: ''
+        });
+      }
     });
   }
   onChange(event) {
@@ -31,8 +37,13 @@ class TaskManager extends React.Component {
       taskValue: event.target.value
     });
   }
-
+   loadList() {
+     return getList().then(tasks => {
+        this.setState({tasks})
+     });
+   }
    componentDidMount() {
+     this.loadList();
    }
   render () {
 
