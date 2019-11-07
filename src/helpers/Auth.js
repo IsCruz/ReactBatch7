@@ -17,7 +17,7 @@ class Auth {
      if(localStorage.getItem('isLogged')){
          this.authenticated = true;
      }
-     return this.isAuthenticated;
+     return this.authenticated;
  }
 }
 export default new Auth()
